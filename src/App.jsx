@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Heading, Image } from '@chakra-ui/react'
+import { LaunchItem } from './components/LaunchItem.jsx'
 import * as API from './services/launches.js'
+import logo from './assets/spacex.png'
 
 export function App() {
 	const [launches, setLaunches] = useState([])
@@ -10,14 +13,15 @@ export function App() {
 
 	return (
 		<>
-			<h1>SpaceX Launches</h1>
-			<ul>
+			<Image m={4} src={logo} width={300} />
+			<Heading as='h1' size='lg' m={4}>
+				SpaceX Launches
+			</Heading>
+			<section>
 				{launches.map((launch) => (
-					<li key={launch.flight_number}>
-						{launch.mission_name}({launch.length_year})
-					</li>
+					<LaunchItem key={launch.flight_number} {...launch} />
 				))}
-			</ul>
+			</section>
 		</>
 	)
 }
